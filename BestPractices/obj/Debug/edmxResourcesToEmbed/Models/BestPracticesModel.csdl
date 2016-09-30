@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BestPracticesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Article">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+    <Property Name="Content" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" />
+    <Property Name="Author" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="Rating" Type="Double" />
+  </EntityType>
+  <EntityType Name="ArticleToCommentMapping">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="ArticleId" />
+      <PropertyRef Name="CommentId" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="ArticleId" Type="Int32" Nullable="false" />
+    <Property Name="CommentId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="CategoryToSubCategoryMapping">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+      <PropertyRef Name="SubCategoryId" />
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="SubCategoryId" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Guid" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Content" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="BestPracticesEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Articles" EntityType="Self.Article" />
+    <EntitySet Name="ArticleToCommentMappings" EntityType="Self.ArticleToCommentMapping" />
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="CategoryToSubCategoryMappings" EntityType="Self.CategoryToSubCategoryMapping" />
+    <EntitySet Name="Comments" EntityType="Self.Comment" />
+  </EntityContainer>
+</Schema>
